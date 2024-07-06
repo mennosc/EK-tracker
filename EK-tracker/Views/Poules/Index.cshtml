@@ -1,31 +1,32 @@
 ﻿@using EK_tracker.Models.ApiModels.Group;
 @model List<GroupModel>
 
-@foreach (GroupModel group in Model)
-{
-    <table class="table">
-        <thead>
-            <th scope="col">Land</th>
-            <th scope="col">Gespeeld</th>
-            <th scope="col">Gewonnen</th>
-            <th scope="col">Gelijk</th>
-            <th scope="col">Verloren</th>
-            <th scope="col">punten</th>
-            <th scope="col">Doelpuntensaldo</th>
-        </thead>
-        <tbody>
-            @foreach (var country in group.Teams)
-            {
-                <tr>
-                    <td><span><img src=@country.Team.ImageUrl/></span>@country.Team.Name</td>
-                    <td>@country.MatchesPlayed</td>
-                    <td>@country.Wins</td>
-                    <td>@country.Draws</td>
-                    <td>@country.Losses</td>
-                    <td>@country.Points</td>
-                    <td>@country.GoalDifference</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+
+    @foreach(GroupModel group in Model)
+    {
+    <div class="container">
+        <div class="row">
+            <div class="col-4">Poule @group.Name.ToUpper()</div>
+            <div class="col"><span class="lg-screen">Gespeeld</span><span class="sm-screen">G</span></div>
+            <div class="col"><span class="lg-screen">Gewonnen</span><span class="sm-screen">W</span></div>
+            <div class="col"><span class="lg-screen">Gelijk</span><span class="sm-screen">D</span></div>
+            <div class="col"><span class="lg-screen">Verloren</span><span class="sm-screen">L</span></div>
+            <div class="col"><span class="lg-screen">Punten</span><span class="sm-screen">P</span></div>
+            <div class="col"><span class="lg-screen">Doelpuntensaldo</span><span class="sm-screen">G</span></div>
+        </div>
+
+        @foreach(var Team in group.Teams)
+        {
+            <div class="row">
+                <div class="col-4"><img src="@Team.Team.ImageUrl" />@Team.Team.Name</div>
+                <div class="col">@Team.MatchesPlayed</div>
+                <div class="col">@Team.Wins</div>
+                <div class="col">@Team.Draws</div>
+                <div class="col">@Team.Losses</div>
+                <div class="col">@Team.Points</div>
+                <div class="col">@Team.GoalDifference</div>
+            </div>
+        }
+    </div>
+    }
+

@@ -18,7 +18,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: linear-gradient(100deg, rgba(9,1,122,1) 11%, rgba(116,9,121,1) 100%, rgba(0,212,255,1) 100%);
 }
 
 img {
@@ -28,5 +29,51 @@ img {
 }
 
 .table {
-    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.row {
+    margin-top: 5px;
+}
+
+.row > div {
+        border-top: 1px solid rgb(109, 108, 108);
+    }
+
+.container {
+    border: 1px solid rgb(109, 108, 108);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.row:hover {
+    background-color: rgb(146, 4, 4);
+}
+
+.sm-screen {
+    display: none;
+}
+
+div {
+    color: white;
+}
+
+@media (width < 990px) {
+    .sm-screen {
+        display: inline-block;
+    }
+
+    .lg-screen {
+        display: none;
+    }
 }
