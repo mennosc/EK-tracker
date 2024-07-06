@@ -13,11 +13,13 @@ namespace EK_tracker.Models.ApiModels.Group
             return jsonData;
         }
 
-        public static List<GroupModel> GetGroupModel()
+        public async static Task<List<GroupModel>> GetGroupModel()
         {
-            string jsonData = ApiService.GetDataAsync("groups").Result;
+            string jsonData = await ApiService.GetDataAsync("groups");
 
-            return JsonConvert.DeserializeObject<List<GroupModel>>(jsonData);
+            List<GroupModel> groups = JsonConvert.DeserializeObject<List<GroupModel>>(jsonData);
+
+            return groups;
         }
     }
 }

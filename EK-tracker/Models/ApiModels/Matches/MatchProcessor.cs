@@ -14,10 +14,9 @@ namespace EK_tracker.Models.ApiModels.Group
             return jsonData;
         }
 
-        public static List<Match> GetMatchModel()
+        public static async Task<List<Match>> GetMatchModel()
         {
-            string jsonData = ApiService.GetDataAsync("matches").Result;
-            System.Diagnostics.Debug.WriteLine(jsonData);
+            string jsonData = await ApiService.GetDataAsync("matches");
             return JsonConvert.DeserializeObject<List<Match>>(jsonData);
         }
     }

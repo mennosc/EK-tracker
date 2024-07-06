@@ -5,9 +5,9 @@ namespace EK_tracker.Controllers
 {
     public class PoulesController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<GroupModel> groups = GroupProcessor.GetGroupModel();
+            List<GroupModel> groups = await GroupProcessor.GetGroupModel();
             foreach (var group in groups)
             {
                 group.Teams.Sort((a, b) =>
@@ -21,7 +21,6 @@ namespace EK_tracker.Controllers
                 });
             }
 
-            //System.Diagnostics.Debug.WriteLine(GroupProcessor.GetGroupData());
             return View(groups);
         }
     }
