@@ -1,0 +1,23 @@
+﻿@using EK_tracker.Models.ApiModels.Matches;
+@model List<Match>
+<h1>Matches</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Datum & Tijd</th>
+            <th scope="col">Landen</th>
+            <th scope="col">Uitslag</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Match match in Model)
+        {
+            <tr>
+                <td>@match.Date</td>
+                <td>@match.TeamA.team.Name-@match.TeamB.team.Name</td>
+                <td>@match.TeamA.Score-@match.TeamB.Score</td>
+            </tr>
+        }
+    </tbody>
+</table>

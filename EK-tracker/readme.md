@@ -1,0 +1,1 @@
+Kleine en simpele applicatie om bekend te worden met C#, ASP.NET Core, MVC model en Entity Framework.
