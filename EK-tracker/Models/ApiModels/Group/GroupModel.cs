@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
-
-namespace EK_tracker.Models.ApiModels.Group
+﻿namespace EK_tracker.Models.ApiModels.Group
 {
     public class GroupModel
     {

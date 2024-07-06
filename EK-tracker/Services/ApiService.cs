@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Text.RegularExpressions;
-using static EK_tracker.Models.ApiModels.Group.GroupModel;
-
-namespace EK_tracker.Services
+﻿namespace EK_tracker.Services
 {
     public static class ApiService
     {

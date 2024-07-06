@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EK_tracker.Models.ApiModels.Matches;
 using EK_tracker.Models.ApiModels.Group;
-using EK_tracker.Services;
 
 namespace EK_tracker.Controllers
 {

@@ -1,7 +1,6 @@
 ﻿using EK_tracker.Services;
 using EK_tracker.Models.ApiModels.Matches;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace EK_tracker.Models.ApiModels.Group
 {

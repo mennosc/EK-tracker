@@ -1,8 +1,4 @@
-using EK_tracker.Models;
-using EK_tracker.Models.ApiModels.Group;
-using EK_tracker.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace EK_tracker.Controllers
 {
