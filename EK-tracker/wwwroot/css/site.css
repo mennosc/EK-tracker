@@ -17,15 +17,21 @@ html {
   min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-    background: linear-gradient(100deg, rgba(9,1,122,1) 11%, rgba(116,9,121,1) 100%, rgba(0,212,255,1) 100%);
+html, body {
+    width: 100%;
+    height: 100%;
 }
 
-img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+div {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: rgb(9,1,122);
+    background: linear-gradient(45deg, #49a09d, #5f2c82);
+    background-attachment: fixed;
+    height: 100vh;
 }
 
 .table {
@@ -46,14 +52,26 @@ img {
     margin-top: 5px;
 }
 
+.div image {
+    display: flex;
+    align-items: center;
+}
+
 .row > div {
-        border-top: 1px solid rgb(109, 108, 108);
-    }
+    border-top: 1px solid rgb(109, 108, 108);
+    background-color: rgba(255,255,255,0.2);
+}
 
 .container {
     border: 1px solid rgb(109, 108, 108);
     border-radius: 10px;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+}
+
+.heading > div {
+    background-color: #55608f;
 }
 
 .row:hover {
@@ -66,6 +84,8 @@ img {
 
 div {
     color: white;
+    margin: 0;
+    padding: 0;
 }
 
 @media (width < 990px) {
