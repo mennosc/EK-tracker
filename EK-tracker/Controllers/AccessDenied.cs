@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace EK_tracker.Controllers
 {
-    public class HomeController : Controller
-    { 
+    public class AccessDenied : Controller
+    {
         public IActionResult Index()
         {
             return View();

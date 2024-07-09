@@ -1,5 +1,8 @@
+using EK_tracker.Data;
 using EK_tracker.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+using Microsoft.EntityFrameworkCore;
 
 namespace EK_tracker
 {
@@ -11,9 +14,7 @@ namespace EK_tracker
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
             builder.Services.AddHttpClient();
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,11 +30,12 @@ namespace EK_tracker
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }
