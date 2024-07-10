@@ -28,9 +28,6 @@ namespace EK_tracker.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                
-
-                return View(user);
             }
             
             return View(user);
