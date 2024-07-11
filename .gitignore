@@ -30,6 +30,7 @@ config/
 FileContentIndex/
 v17/
 .vs/
+Migrations/
 
 ###################
 # Web publish log #

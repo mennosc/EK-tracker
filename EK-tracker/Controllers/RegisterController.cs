@@ -1,15 +1,17 @@
 ﻿using EK_tracker.Data;
 using EK_tracker.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EK_tracker.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly UserDbContext _context;
-        public RegisterController(UserDbContext context)
+        private readonly UserManager<UserModel> _userManager;
+        public RegisterController(UserManager<UserModel> manager)
         {
-            _context = context;
+            _userManager = manager;
         }
          public IActionResult Index()
         {
@@ -17,18 +19,24 @@ namespace EK_tracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(UserRegistrationModel user)
+        public async Task<IActionResult> Index(UserRegistrationModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.users.Add(user);
+                var user = new UserModel
+                {
+                    UserName = model.UserName,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email
+                };
 
-                _context.SaveChanges();
-
+                await _userManager.CreateAsync(user, model.Password);
+                //Todo: Immediatly sign in and redirect to homepage
                 return RedirectToAction("Index", "Home");
             }
 
-            return View(user);
+            return View(model);
         }
     }
 }

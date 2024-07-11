@@ -1,18 +1,23 @@
 ﻿using EK_tracker.Data;
 using EK_tracker.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace EK_tracker.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly UserDbContext _context;
+        private readonly SignInManager<UserModel> _signInManager;
+        private readonly UserManager<UserModel> _userManager;
 
-        public LoginController(UserDbContext context)
+        //Todo: Fix Authorization
+        public LoginController(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager)
         {
-            _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -20,32 +25,29 @@ namespace EK_tracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>Index(UserLoginModel user)
-        {
+        public async Task<IActionResult> Index(UserRegistrationModel model)
+        { 
             if (ModelState.IsValid)
-            {   
-                var match = _context.users.Where(storedUser => storedUser.UserName == user.UserName && storedUser.Password == user.Password);                                                                
-                
-                //We found a user in the db
-                if(match.Count() != 0)
+            {
+                var user = await _userManager.FindByNameAsync(model.UserName);
+                if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, "Admin")
+                        new Claim(ClaimTypes.Name, user.UserName),
+                        new Claim(ClaimTypes.Email, user.Email)
                     };
 
-                    var identity = new ClaimsIdentity(claims, "UserCookie");
-                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+                    var claimsIdentity = new ClaimsIdentity(claims, "UserCookie");
+                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
                     await HttpContext.SignInAsync("UserCookie", claimsPrincipal);
 
-                    return RedirectToAction("Index", "Home");
                 }
+                return RedirectToAction("Index", "Home");
             }
-            
-            return View(user);
+            return View(model);
         }
-
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync();
