@@ -1,4 +1,5 @@
 using EK_tracker.Data;
+using EK_tracker.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EK_tracker
@@ -9,9 +10,17 @@ namespace EK_tracker
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            var API_KEY = builder.Configuration["x-rapidapi-key"];
+            var API_HOST = builder.Configuration["x-rapidapi-host"];
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddHttpClient();
+            builder.Services.AddHttpClient<ApiService>(client =>
+            {
+                client.DefaultRequestHeaders.Add("x-rapidapi-key", API_KEY);
+                client.DefaultRequestHeaders.Add("x-rapidapi-host", API_HOST);
+
+            });
+            builder.Services.AddSingleton<ApiService>();
             builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddAuthentication("UserCookie").AddCookie("UserCookie", options =>
             {

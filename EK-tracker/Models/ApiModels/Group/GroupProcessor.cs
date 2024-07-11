@@ -5,16 +5,9 @@ namespace EK_tracker.Models.ApiModels.Group
 {
     public static class GroupProcessor
     {
-        public static string GetGroupData()
+        public async static Task<List<GroupModel>> GetGroupModel(ApiService _apiService)
         {
-            string jsonData = ApiService.GetDataAsync("groups").Result;
-
-            return jsonData;
-        }
-
-        public async static Task<List<GroupModel>> GetGroupModel()
-        {
-            string jsonData = await ApiService.GetDataAsync("groups");
+            string jsonData = await _apiService.GetDataAsync("groups");
 
             List<GroupModel> groups = JsonConvert.DeserializeObject<List<GroupModel>>(jsonData);
 
