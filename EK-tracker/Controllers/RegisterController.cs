@@ -10,7 +10,12 @@ namespace EK_tracker.Controllers
 {
     public class RegisterController : Controller
     {
-        public IActionResult Index()
+        private readonly UserDbContext _context;
+        public RegisterController(UserDbContext context)
+        {
+            _context = context;
+        }
+         public IActionResult Index()
         {
             return View();
         }
@@ -20,12 +25,9 @@ namespace EK_tracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                using UserDbContext context = new UserDbContext(new DbContextOptionsBuilder<UserDbContext>()
-                                                                                .UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = YourDatabase")
-                                                                                .Options);
-                context.users.Add(user);
+                _context.users.Add(user);
 
-                context.SaveChanges();
+                _context.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
             }

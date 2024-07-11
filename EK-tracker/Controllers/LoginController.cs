@@ -11,6 +11,12 @@ namespace EK_tracker.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly UserDbContext _context;
+
+        public LoginController(UserDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             return View();
@@ -20,11 +26,8 @@ namespace EK_tracker.Controllers
         public async Task<IActionResult>Index(UserLoginModel user)
         {
             if (ModelState.IsValid)
-            {
-                using UserDbContext context = new UserDbContext(new DbContextOptionsBuilder<UserDbContext>()
-                                                                                .UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = YourDatabase").Options);
-                
-                var match = context.users.Where(storedUser => storedUser.UserName == user.UserName && storedUser.Password == user.Password);                                                                
+            {   
+                var match = _context.users.Where(storedUser => storedUser.UserName == user.UserName && storedUser.Password == user.Password);                                                                
                 
                 //We found a user in the db
                 if(match.Count() != 0)

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using EK_tracker.Models;
 
 namespace EK_tracker
 {
@@ -24,6 +25,9 @@ namespace EK_tracker
                 options.LoginPath = "/Login";
                 options.AccessDeniedPath = "/AccessDenied";
             });
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
 
             var app = builder.Build();
 

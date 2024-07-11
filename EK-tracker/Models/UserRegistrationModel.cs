@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace EK_tracker.Models
 {
@@ -7,6 +8,7 @@ namespace EK_tracker.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [PersonalData]
         public string? UserName { get; set; }
         [Required]
         public string? FirstName { get; set; }
@@ -16,6 +18,7 @@ namespace EK_tracker.Models
         [EmailAddress]
         public string? Email { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         public string? Password { get; set; }
     }
 }
