@@ -23,4 +23,8 @@
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\views\Login.css" />
+  </ItemGroup>
+
 </Project>

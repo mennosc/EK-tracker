@@ -1,8 +1,10 @@
 ﻿using EK_tracker.Models.ApiModels.Group;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EK_tracker.Controllers
 {
+    [Authorize]
     public class PoulesController : Controller
     {
         public async Task<IActionResult> Index()

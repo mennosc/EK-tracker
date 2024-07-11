@@ -16,7 +16,7 @@ namespace EK_tracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(UserModel user)
+        public IActionResult Index(UserRegistrationModel user)
         {
             if (ModelState.IsValid)
             {

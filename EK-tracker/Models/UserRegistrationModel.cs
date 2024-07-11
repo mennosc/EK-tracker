@@ -2,11 +2,10 @@
 
 namespace EK_tracker.Models
 {
-    public class UserModel
+    public class UserRegistrationModel
     {
         [Key]
         public int Id { get; set; }
-        [Required]
         public string? UserName { get; set; }
         
         public string? FirstName { get; set; }

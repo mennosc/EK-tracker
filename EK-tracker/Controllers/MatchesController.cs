@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EK_tracker.Models.ApiModels.Matches;
 using EK_tracker.Models.ApiModels.Group;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EK_tracker.Controllers
 {
+    [Authorize]
     public class MatchesController : Controller
     {
         public async Task<IActionResult> Index()
