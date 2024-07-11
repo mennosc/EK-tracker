@@ -1,11 +1,5 @@
 using EK_tracker.Data;
-using Microsoft.Extensions.Configuration;
-using EK_tracker.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using EK_tracker.Models;
 
 namespace EK_tracker
 {

@@ -1,10 +1,6 @@
 ﻿using EK_tracker.Data;
 using EK_tracker.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using System.Security.Claims;
 
 namespace EK_tracker.Controllers
 {
