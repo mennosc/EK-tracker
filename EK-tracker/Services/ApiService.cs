@@ -3,15 +3,18 @@
     public class ApiService
     {
         private readonly HttpClient _client;
+        private readonly IConfiguration _configuration;
 
-        public ApiService(HttpClient client)
+        public ApiService(HttpClient client, IConfiguration configuration)
         {
+            _configuration = configuration;
             _client = client;
         }
 
         public async Task<string> GetDataAsync(string path)
         {
-            using HttpResponseMessage response = await _client.GetAsync($"https://euro-20242.p.rapidapi.com/{path}");
+            var host = _configuration["x-rapidapi-host"];
+            using HttpResponseMessage response = await _client.GetAsync($"https://{host}/{path}");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }

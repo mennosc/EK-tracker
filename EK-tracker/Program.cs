@@ -20,7 +20,7 @@ namespace EK_tracker
                 client.DefaultRequestHeaders.Add("x-rapidapi-host", API_HOST);
 
             });
-            builder.Services.AddSingleton<ApiService>();
+            
             builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddAuthentication("UserCookie").AddCookie("UserCookie", options =>
             {
