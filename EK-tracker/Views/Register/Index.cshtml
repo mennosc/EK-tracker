@@ -1,35 +1,61 @@
 ﻿@model EK_tracker.Models.UserRegistrationModel;
 
-<div class="container">
-    <h1>Register Account</h1>
-    <form method="post" asp-controller="Register" asp-action="Index">
-        <div class="container">
-            <div class="form-group">
-                <label>Username</label>
-                <input asp-for="UserName" type="text" />
-            </div>
+@section Styles {
+    <link href="css/views/Register.css" rel="stylesheet" type="text/css" />
+}
 
-            <div class="form-group">
-                <label>First Name</label>
-                <input asp-for="FirstName" type="text" />
-            </div>
+<div class="limiter">
+    <div class="wrapper">
+        <div class="login-card">
+            <form class="form" method="post" asp-controller="Login" asp-action="Index">
+                <h1 class="login-text poppins-bold-italic">Register</h1>
+                <div class="wrap-input">
+                    <span class="label-input username poppins-regular">Username</span>
+                    <input class="input-form" asp-for="UserName" type="text" placeholder="Type your username" />
+                    <span class="focus-input" data-symbol="&#xf206;"></span>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="wrap-input">
+                    <span class="label-input firstname poppins-regular">First Name</span>
+                    <input class="input-form" asp-for="FirstName" type="text" placeholder="Type your first name" />
+                    <span class="focus-input" data-symbol="&#xf206;"></span>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="wrap-input">
+                    <span class="label-input lastname poppins-regular">Last Name</span>
+                    <input class="input-form" asp-for="LastName" type="text" placeholder="Type your last name" />
+                    <span class="focus-input" data-symbol="&#xf206;"></span>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="wrap-input">
+                    <span class="label-input poppins-regular">Email</span>
+                    <input type="text" class="input-form" asp-for="Email" placeholder="Type your email address" />
+                    <span class="focus-input" data-symbol="&#xf0e0;"></span>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label>Last Name</label>
-                <input asp-for="LastName" type="text" />
-            </div>
+                <div class="wrap-input password">
+                    <span class="label-input password poppins-regular">Password</span>
+                    <input class="input-form poppins-medium" asp-for="Password" type="password" placeholder="Type your password" />
+                    <span class="focus-input" data-symbol="&#xf190;"></span>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label>Email</label>
-                <input asp-for="Email" type="text" />
-            </div>
+                <div class="wrap-input password">
+                    <span class="label-input password poppins-regular">Password again</span>
+                    <input class="input-form poppins-medium" type="password" placeholder="Type your password again" />
+                    <span class="focus-input" data-symbol="&#xf190;"></span>
+                    
+                </div>
 
-            <div class="form-group">
-                <label>Password</label>
-                <input asp-for="Password" type="text" />
-            </div>
-
-            <input type="submit" class="btn btn-primary mt-3" value="Register!" />
+                <div class="forgot-password"><a asp-controller="Register" asp-action="Index">No account yet?</a></div>
+                <div class="login-form-button">
+                    <div class="wrap-login-button">
+                        <div class="form-button-background"></div>
+                        <button type="submit" class="login-button poppins-medium" value="Login">Login</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
