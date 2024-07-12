@@ -4,11 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EK_tracker.Controllers
 {
-    public class LoginController(SignInManager<User> signInManager, UserManager<User> userManager) : Controller
+    public class LoginController : Controller
     {
-        private readonly SignInManager<User> _signInManager = signInManager;
-        private readonly UserManager<User> _userManager = userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
+        public LoginController(
+            SignInManager<User> signInManager, 
+            UserManager<User> userManager)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+        }
         public IActionResult Index()
         {
             return View();

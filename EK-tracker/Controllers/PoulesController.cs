@@ -6,16 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace EK_tracker.Controllers
 {
     [Authorize]
-    public class PoulesController(ApiService apiService) : Controller
+    public class PoulesController : Controller
     {
-        private readonly ApiService _apiService = apiService;
-
+        private readonly ApiService _apiService;
+        public PoulesController(ApiService apiService) {
+            _apiService = apiService;
+        }
         public async Task<IActionResult> Index()
         {
             var groups = await _apiService.GetDataModel<List<Poule>>("groups");
             foreach (var group in groups)
             {
-                group?.Teams?.Sort((a, b) =>
+                group.Teams.Sort((a, b) =>
                 {
                     var ret = b.Points.CompareTo(a.Points);
                     if (ret == 0)

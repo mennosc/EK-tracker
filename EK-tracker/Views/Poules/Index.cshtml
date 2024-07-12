@@ -6,7 +6,7 @@
     {
     <div class="container">
         <div class="row">
-            <div class="col-4">Poule @group.Name?.ToUpper()</div>
+            <div class="col-4">Poule @group.Name.ToUpper()</div>
             <div class="col"><span class="lg-screen">Gespeeld</span><span class="sm-screen">G</span></div>
             <div class="col"><span class="lg-screen">Gewonnen</span><span class="sm-screen">W</span></div>
             <div class="col"><span class="lg-screen">Gelijk</span><span class="sm-screen">D</span></div>
@@ -15,10 +15,10 @@
             <div class="col"><span class="lg-screen">Doelpuntensaldo</span><span class="sm-screen">G</span></div>
         </div>
 
-        @foreach(var Team in group?.Teams!)
+        @foreach(var Team in group.Teams)
         {
             <div class="row">
-                <div class="col-4"><img src="@Team.Team?.ImageUrl" />@Team.Team?.Name</div>
+                <div class="col-4"><img src="@Team.Team.ImageUrl" />@Team.Team.Name</div>
                 <div class="col">@Team.MatchesPlayed</div>
                 <div class="col">@Team.Wins</div>
                 <div class="col">@Team.Draws</div>

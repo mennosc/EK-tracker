@@ -7,11 +7,15 @@ using System.Security.Claims;
 
 namespace EK_tracker.Controllers
 {
-    public class RegisterController(UserManager<User> userManager, SignInManager<User> signInManager) : Controller
+    public class RegisterController : Controller
     {
-        private readonly UserManager<User> _userManager = userManager;
-        private readonly SignInManager<User> _signInManager = signInManager;
-
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        public RegisterController(UserManager<User> userManager, SignInManager<User> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
          public IActionResult Index()
         {
             return View();

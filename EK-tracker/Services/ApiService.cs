@@ -2,10 +2,16 @@
 
 namespace EK_tracker.Services
 {
-    public class ApiService(HttpClient client, IConfiguration configuration)
+    public class ApiService
     {
-        private readonly HttpClient _client = client;
-        private readonly IConfiguration _configuration = configuration;
+        private readonly HttpClient _client;
+        private readonly IConfiguration _configuration;
+
+        public ApiService(HttpClient client, IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _client = client;
+        }
 
         public async Task<string> GetDataAsync(string path)
         {
@@ -19,9 +25,9 @@ namespace EK_tracker.Services
         {
             string jsonData = await this.GetDataAsync(path);
 
-            T? model = JsonConvert.DeserializeObject<T>(jsonData);
+            T model = JsonConvert.DeserializeObject<T>(jsonData);
 
-            return model!;
+            return model;
         }
     }
 }
