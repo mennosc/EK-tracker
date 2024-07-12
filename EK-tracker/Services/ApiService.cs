@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace EK_tracker.Services
+﻿namespace EK_tracker.Services
 {
     public class ApiService
     {
@@ -19,15 +17,6 @@ namespace EK_tracker.Services
             using HttpResponseMessage response = await _client.GetAsync($"https://{host}/{path}");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
-        }
-
-        public async Task<T> GetDataModel<T>(string path)
-        {
-            string jsonData = await this.GetDataAsync(path);
-
-            T model = JsonConvert.DeserializeObject<T>(jsonData);
-
-            return model;
         }
     }
 }

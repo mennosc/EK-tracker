@@ -6,12 +6,10 @@ namespace EK_tracker.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<UserModel> _signInManager;
+        private readonly UserManager<UserModel> _userManager;
 
-        public LoginController(
-            SignInManager<User> signInManager, 
-            UserManager<User> userManager)
+        public LoginController(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -22,7 +20,7 @@ namespace EK_tracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(RegistratedUser model)
+        public async Task<IActionResult> Index(UserRegistrationModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -32,7 +30,7 @@ namespace EK_tracker.Controllers
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
+                await _signInManager.PasswordSignInAsync(user, model.Password,false, false);
             }
             
             return RedirectToAction("Index", "Home");

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EK_tracker.Models
 {
-    public class User : IdentityUser
+    public class UserModel : IdentityUser
     {
         [Key]
         public int Id { get; set; }

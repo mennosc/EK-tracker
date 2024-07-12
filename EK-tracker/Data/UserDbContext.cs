@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EK_tracker.Data
 {
-    public class UserDbContext : IdentityDbContext<User>
+    public class UserDbContext : IdentityDbContext<UserModel>
     {
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserModel> users { get; set; }
     }
 }

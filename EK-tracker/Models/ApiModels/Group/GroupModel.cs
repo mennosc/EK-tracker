@@ -1,6 +1,6 @@
-﻿namespace EK_tracker.Models
+﻿namespace EK_tracker.Models.ApiModels.Group
 {
-    public class Poule
+    public class GroupModel
     {
         public string Name { get; set; }
         public List<TeamStats> Teams { get; set; }
