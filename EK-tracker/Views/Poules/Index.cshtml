@@ -1,8 +1,8 @@
-﻿@using EK_tracker.Models.ApiModels.Group;
-@model List<GroupModel>
+﻿@using EK_tracker.Models;
+@model List<Group>
 <partial name="_Navbar" />
 
-    @foreach(GroupModel group in Model)
+    @foreach(Group group in Model)
     {
     <div class="container">
         <div class="row">

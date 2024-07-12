@@ -6,10 +6,10 @@ namespace EK_tracker.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly SignInManager<UserModel> _signInManager;
-        private readonly UserManager<UserModel> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
-        public LoginController(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager)
+        public LoginController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -20,7 +20,7 @@ namespace EK_tracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(UserRegistrationModel model)
+        public async Task<IActionResult> Index(RegistrationUser model)
         {
             if (!ModelState.IsValid)
             {

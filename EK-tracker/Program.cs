@@ -26,7 +26,7 @@ namespace EK_tracker
 
             builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
             
-            builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireUppercase = true;

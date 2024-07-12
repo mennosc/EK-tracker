@@ -1,4 +1,4 @@
-﻿namespace EK_tracker.Models.ApiModels.Matches
+﻿namespace EK_tracker.Models
 {
     public class Match
     {

@@ -1,4 +1,6 @@
-﻿namespace EK_tracker.Services
+﻿using Newtonsoft.Json;
+
+namespace EK_tracker.Services
 {
     public class ApiService
     {
@@ -18,9 +20,6 @@
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
         public async Task<T> GetDataModel<T>(string path)
         {
@@ -30,8 +29,5 @@
 
             return model;
         }
->>>>>>> parent of c79da7c (Refactor)
-=======
->>>>>>> parent of d4f299b (Delete ugly GroupProcessor and MatchProcessor)
     }
 }
