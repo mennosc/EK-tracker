@@ -6,3 +6,4 @@ Todo:
 	- Inlezen op beveiliging met EF core en Identity voor best practices
 	- Verbeteren naming conventions
 	- Applicatie omzetten naar vertical slicing folder structuur
+	- Nog een wachtwoord input voor validatie
