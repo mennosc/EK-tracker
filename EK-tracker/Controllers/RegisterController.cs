@@ -9,9 +9,11 @@ namespace EK_tracker.Controllers
     public class RegisterController : Controller
     {
         private readonly UserManager<UserModel> _userManager;
-        public RegisterController(UserManager<UserModel> manager)
+        private readonly SignInManager<UserModel> _signInManager;
+        public RegisterController(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
-            _userManager = manager;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
          public IActionResult Index()
         {
@@ -31,9 +33,14 @@ namespace EK_tracker.Controllers
                     Email = model.Email
                 };
 
-                await _userManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if(result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
                 //Todo: Immediatly sign in and redirect to homepage
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Login");
             }
 
             return View(model);

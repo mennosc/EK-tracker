@@ -26,23 +26,22 @@ namespace EK_tracker.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Index(UserRegistrationModel model)
-        { 
+        {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.UserName);
                 if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
                 {
-                    var claims = new List<Claim>
+                    //Creat new user from stored information in DB
+                    UserModel userModel = new UserModel
                     {
-                        new Claim(ClaimTypes.Name, user.UserName),
-                        new Claim(ClaimTypes.Email, user.Email)
+                        UserName = user.UserName,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email
                     };
 
-                    var claimsIdentity = new ClaimsIdentity(claims, "UserCookie");
-                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-                    await HttpContext.SignInAsync("UserCookie", claimsPrincipal);
-
+                   await _signInManager.SignInAsync(userModel, isPersistent: false);
                 }
                 return RedirectToAction("Index", "Home");
             }
@@ -50,7 +49,7 @@ namespace EK_tracker.Controllers
         }
         public async Task<IActionResult> LogOut()
         {
-            await HttpContext.SignOutAsync();
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
     }

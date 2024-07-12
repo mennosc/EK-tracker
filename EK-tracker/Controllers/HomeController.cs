@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EK_tracker.Controllers
 {
-    
+    [Authorize]
     public class HomeController : Controller
     { 
         public IActionResult Index()
