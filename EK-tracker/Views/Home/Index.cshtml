@@ -1,6 +1,6 @@
 ﻿<partial name="_Navbar"/>
 
-@if(base.User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated)
 {
-    <h1>Welcome @base.User.Identity.Name</h1>
+    <h1>Hello @User.Identity.Name</h1>
 }

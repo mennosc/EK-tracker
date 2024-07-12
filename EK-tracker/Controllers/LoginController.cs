@@ -26,25 +26,18 @@ namespace EK_tracker.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UserRegistrationModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.UserName);
-                if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
-                {
-                    //Creat new user from stored information in DB
-                    UserModel userModel = new UserModel
-                    {
-                        UserName = user.UserName,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Email = user.Email
-                    };
-
-                   await _signInManager.SignInAsync(userModel, isPersistent: false);
-                }
-                return RedirectToAction("Index", "Home");
+                return View(model);
             }
-            return View(model);
+            
+            var user = await _userManager.FindByNameAsync(model.UserName);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                await _signInManager.PasswordSignInAsync(user, model.Password,false, false);
+            }
+            
+            return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> LogOut()
         {

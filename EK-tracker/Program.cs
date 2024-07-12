@@ -11,11 +11,13 @@ namespace EK_tracker
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             var API_KEY = builder.Configuration["x-rapidapi-key"];
             var API_HOST = builder.Configuration["x-rapidapi-host"];
 
             builder.Services.AddControllersWithViews();
+
             builder.Services.AddHttpClient<ApiService>(client =>
             {
                 client.DefaultRequestHeaders.Add("x-rapidapi-key", API_KEY);
@@ -23,13 +25,14 @@ namespace EK_tracker
             });
 
             builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
+            
             builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
             {
-                options.Password.RequireDigit = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 5;
-                options.Password.RequireLowercase = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 7;
+                options.Password.RequireLowercase = true;
             })
             .AddEntityFrameworkStores<UserDbContext>()
             .AddDefaultTokenProviders();
@@ -37,13 +40,6 @@ namespace EK_tracker
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Login";
-            });
-
-            builder.Services.AddAuthentication("UserCookie").AddCookie("UserCookie", options =>
-            {
-                options.Cookie.Name = "UserCookie";
-                options.LoginPath = "/Login";
-                options.AccessDeniedPath = "/AccessDenied";
             });
 
             var app = builder.Build();
