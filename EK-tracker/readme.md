@@ -7,3 +7,4 @@ Todo:
 	- Verbeteren naming conventions
 	- Applicatie omzetten naar vertical slicing folder structuur
 	- Nog een wachtwoord input voor validatie
+	- Fix Nullable types
