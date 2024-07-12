@@ -1,15 +1,15 @@
-﻿namespace EK_tracker.Models.ApiModels.Matches
+﻿namespace EK_tracker.Models
 {
     public class Match
     {
         public string Id { get; set; }
         public int Number { get; set; }
         public DateTime Date { get; set; }
-        public TeamInfo TeamA { get; set; }
-        public TeamInfo TeamB { get; set; }
+        public CountryInfo TeamA { get; set; }
+        public CountryInfo TeamB { get; set; }
     }
 
-    public class TeamInfo
+    public class CountryInfo
     {
         public int Score { get; set; }
         public Team team { get; set; }
