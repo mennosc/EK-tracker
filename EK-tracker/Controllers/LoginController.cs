@@ -13,7 +13,6 @@ namespace EK_tracker.Controllers
         private readonly SignInManager<UserModel> _signInManager;
         private readonly UserManager<UserModel> _userManager;
 
-        //Todo: Fix Authorization
         public LoginController(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager)
         {
             _signInManager = signInManager;
