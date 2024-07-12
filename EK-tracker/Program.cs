@@ -50,7 +50,6 @@ namespace EK_tracker
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

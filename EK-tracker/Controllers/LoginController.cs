@@ -22,10 +22,10 @@ namespace EK_tracker.Controllers
                 return View(model);
             }
             
-            var user = await _userManager.FindByNameAsync(model?.UserName ?? string.Empty);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model?.Password ?? string.Empty))
+            var user = await _userManager.FindByNameAsync(model.UserName);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                await _signInManager.PasswordSignInAsync(user, model?.Password ?? string.Empty, isPersistent: false, lockoutOnFailure: false);
+                await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
             }
             
             return RedirectToAction("Index", "Home");
