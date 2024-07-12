@@ -18,5 +18,17 @@
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
+<<<<<<< HEAD
+=======
+
+        public async Task<T> GetDataModel<T>(string path)
+        {
+            string jsonData = await this.GetDataAsync(path);
+
+            T model = JsonConvert.DeserializeObject<T>(jsonData);
+
+            return model;
+        }
+>>>>>>> parent of c79da7c (Refactor)
     }
 }
