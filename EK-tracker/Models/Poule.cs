@@ -2,13 +2,13 @@
 {
     public class Poule
     {
-        public string Name { get; set; }
-        public List<TeamStats> Teams { get; set; }
+        public string? Name { get; set; }
+        public List<TeamStats>? Teams { get; set; }
     }
 
     public class TeamStats
     {
-        public TeamInfo Team { get; set; }
+        public TeamInfo? Team { get; set; }
         public int Points { get; set; }
         public int Wins { get; set; }
         public int Draws { get; set; }
@@ -20,7 +20,7 @@
 
     public class TeamInfo
     {
-        public string Name { get; set; }
-        public string ImageUrl { get; set; }
+        public string? Name { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

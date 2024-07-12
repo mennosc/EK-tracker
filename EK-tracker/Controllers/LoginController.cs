@@ -4,18 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EK_tracker.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController(SignInManager<User> signInManager, UserManager<User> userManager) : Controller
     {
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager = signInManager;
+        private readonly UserManager<User> _userManager = userManager;
 
-        public LoginController(
-            SignInManager<User> signInManager, 
-            UserManager<User> userManager)
-        {
-            _signInManager = signInManager;
-            _userManager = userManager;
-        }
         public IActionResult Index()
         {
             return View();
@@ -29,10 +22,10 @@ namespace EK_tracker.Controllers
                 return View(model);
             }
             
-            var user = await _userManager.FindByNameAsync(model.UserName);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            var user = await _userManager.FindByNameAsync(model?.UserName ?? string.Empty);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model?.Password ?? string.Empty))
             {
-                await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
+                await _signInManager.PasswordSignInAsync(user, model?.Password ?? string.Empty, isPersistent: false, lockoutOnFailure: false);
             }
             
             return RedirectToAction("Index", "Home");
