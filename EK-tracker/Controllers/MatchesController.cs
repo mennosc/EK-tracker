@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using EK_tracker.Models.ApiModels.Group;
+using EK_tracker.Models;
 using Microsoft.AspNetCore.Authorization;
 using EK_tracker.Services;
-using EK_tracker.Models;
 
 namespace EK_tracker.Controllers
 {
@@ -17,7 +16,7 @@ namespace EK_tracker.Controllers
         public async Task<IActionResult> Index()
         {
             var matches = await _apiService.GetDataModel<List<Match>>("matches");
-            matches = matches.Where(match => match.TeamA.team != null && match.TeamB.team != null).ToList();
+            matches = matches.Where(match => match.TeamA.Team != null && match.TeamB.Team != null).ToList();
 
             matches.Sort((matchA, matchB) => matchA.Date.CompareTo(matchB.Date));
             return View(matches);

@@ -26,13 +26,13 @@ namespace EK_tracker.Controllers
             {
                 return View(model);
             }
-            
+
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                await _signInManager.PasswordSignInAsync(user, model.Password,false, false);
+                await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
             }
-            
+
             return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> LogOut()

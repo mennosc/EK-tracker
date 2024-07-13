@@ -3,6 +3,7 @@ using EK_tracker.Models;
 using EK_tracker.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace EK_tracker
 {
@@ -15,6 +16,8 @@ namespace EK_tracker
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             var API_KEY = builder.Configuration["x-rapidapi-key"];
             var API_HOST = builder.Configuration["x-rapidapi-host"];
+            var GOOGLE_CLIENT_ID = builder.Configuration["google-client-id"];
+            var GOOGLE_CLIENT_SECRET = builder.Configuration["google-client-secret"];
 
             builder.Services.AddControllersWithViews();
 

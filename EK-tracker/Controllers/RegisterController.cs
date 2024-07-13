@@ -33,8 +33,7 @@ namespace EK_tracker.Controllers
             {
                 UserName = model.UserName,
                 FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email
+                LastName = model.LastName
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);

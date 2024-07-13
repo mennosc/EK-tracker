@@ -8,7 +8,7 @@
 
     public class TeamStats
     {
-        public TeamInfo Team { get; set; }
+        public CountryInfo Team { get; set; }
         public int Points { get; set; }
         public int Wins { get; set; }
         public int Draws { get; set; }
@@ -18,7 +18,7 @@
         public int GoalDifference { get; set; }
     }
 
-    public class TeamInfo
+    public class CountryInfo
     {
         public string Name { get; set; }
         public string ImageUrl { get; set; }

@@ -1,6 +1,7 @@
 Kleine en simpele applicatie om bekend te worden met C#, ASP.NET Core, MVC model, Entity Framework en Identity Framework.
 
 Todo:
+	- Fix database registratie
 	- Client side wachtwoord validatie
 	- Inloggen met Google/Facebook/Github
 	- Inlezen op beveiliging met EF core en Identity voor best practices
