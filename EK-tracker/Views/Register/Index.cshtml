@@ -1,4 +1,5 @@
 ﻿@model EK_tracker.Models.RegisterViewModel;
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Identity.IdentityOptions> IdentityOptions;
 
 @section Styles {
     <link href="css/views/Register.css" rel="stylesheet" type="text/css" />
@@ -36,18 +37,17 @@
 
                 <div class="wrap-input password">
                     <span class="label-input password poppins-regular">Password</span>
-                    <input class="input-form poppins-medium" asp-for="Password" type="password" placeholder="Type your password" />
+                    <input class="input-form poppins-medium" id="password-input" asp-for="Password" type="password" placeholder="Type your password" />
                     <span class="focus-input" data-symbol="&#xf190;"></span>
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span id="password-validation"class="text-danger"></span>
                 </div>
 
                 <div class="wrap-input password">
                     <span class="label-input password poppins-regular">Confirm Password</span>
-                    <input class="input-form poppins-medium" asp-for="ConfirmPassword" type="password" placeholder="Type your password" />
+                    <input class="input-form poppins-medium" id="confirmPassword" asp-for="ConfirmPassword" type="password" placeholder="Type your password" />
                     <span class="focus-input" data-symbol="&#xf190;"></span>
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    <span asp-validation-for="ConfirmPassword" id="confirmPasswordError" class="text-danger"></span>
                 </div>
-
 
                 <div class="forgot-password"><a asp-controller="Login" asp-action="Index">Already have an account?</a></div>
                 <div class="login-form-button">
@@ -60,3 +60,48 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        const passwordOptions = {
+            RequiredLength: @IdentityOptions.Value.Password.RequiredLength,
+            RequiredDigit: @IdentityOptions.Value.Password.RequireDigit.ToString().ToLower(),
+            RequireLowercase: @IdentityOptions.Value.Password.RequireLowercase.ToString().ToLower(),
+            RequireUppercase: @IdentityOptions.Value.Password.RequireUppercase.ToString().ToLower(),
+            RequireNonAlphanumeric: @IdentityOptions.Value.Password.RequireNonAlphanumeric.ToString().ToLower()
+        }
+
+        const passwordInput = document.querySelector("#password-input");
+        const passwordValidationError = document.querySelector("#password-validation");
+
+        const confirmPasswordInput = document.querySelector("#confirmPassword");
+        const confirmPasswordError = document.querySelector("#confirmPasswordError");
+
+        passwordInput.addEventListener("input", (event) => {
+            const password = event.target.value;
+            
+            if (password.length < passwordOptions.RequiredLength) {
+                passwordValidationError.innerHTML = `Password must be at least ${passwordOptions.RequiredLength} characters long`;
+            } else if (passwordOptions.RequiredDigit && !/\d/.test(password)) {
+                passwordValidationError.innerHTML = "The password has to include a digit";
+            } else if (passwordOptions.RequireLowercase && !/[a-z]/.test(password)) {
+                passwordValidationError.innerHTML = "The password must include a lowercase letters";
+            } else if (passwordOptions.RequireUppercase && !/[A-Z]/.test(password)) {
+                passwordValidationError.innerHTML = "The password must include an uppercase letter";
+            } else if (passwordOptions.RequireNonAlphanumeric && !/[^a-zA-Z\d\s:]/.test(password)) {
+                passwordValidationError.innerHTML = "The password must include a special symbol";
+            } else {
+                passwordValidationError.innerHTML = "";
+            }
+        });
+
+        confirmPasswordInput.addEventListener("input", (event) => {
+            const confirmPassword = event.target.value;
+            if (confirmPassword != passwordInput.value) {
+                confirmPasswordError.innerHTML = "Passwords do not match";
+            } else {
+                confirmPasswordError.innerHTML = "";
+            }
+        });
+    </script>
+}

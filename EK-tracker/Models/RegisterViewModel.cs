@@ -23,7 +23,6 @@ namespace EK_tracker.Models
         public string Password { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "The passwords provided do not match")]
         public string? ConfirmPassword { get; set; }
     }
 }

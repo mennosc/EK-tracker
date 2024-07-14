@@ -31,10 +31,10 @@ namespace EK_tracker
             
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequiredLength = 7;
+                options.Password.RequiredLength = 5;
                 options.Password.RequireLowercase = true;
             })
             .AddEntityFrameworkStores<UserDbContext>()
