@@ -1,4 +1,4 @@
-﻿@model EK_tracker.Models.RegistrationUser;
+﻿@model EK_tracker.Models.RegisterViewModel;
 
 @section Styles {
     <link href="css/views/Register.css" rel="stylesheet" type="text/css" />
@@ -41,11 +41,19 @@
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
+                <div class="wrap-input password">
+                    <span class="label-input password poppins-regular">Confirm Password</span>
+                    <input class="input-form poppins-medium" asp-for="ConfirmPassword" type="password" placeholder="Type your password" />
+                    <span class="focus-input" data-symbol="&#xf190;"></span>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+
                 <div class="forgot-password"><a asp-controller="Login" asp-action="Index">Already have an account?</a></div>
                 <div class="login-form-button">
                     <div class="wrap-login-button">
                         <div class="form-button-background"></div>
-                        <button type="submit" class="login-button poppins-medium" value="Login">Login</button>
+                        <button type="submit" class="login-button poppins-medium" value="register">Register</button>
                     </div>
                 </div>
             </form>

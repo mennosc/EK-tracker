@@ -7,22 +7,17 @@ using System.Security.Claims;
 
 namespace EK_tracker.Controllers
 {
-    public class RegisterController : Controller
+    public class RegisterController(UserManager<User> userManager, SignInManager<User> signInManager) : Controller
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        public RegisterController(UserManager<User> userManager, SignInManager<User> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly SignInManager<User> _signInManager = signInManager;
          public IActionResult Index()
-        {
+         {
             return View();
-        }
+         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(RegistrationUser model)
+        public async Task<IActionResult> Index(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -33,7 +28,8 @@ namespace EK_tracker.Controllers
             {
                 UserName = model.UserName,
                 FirstName = model.FirstName,
-                LastName = model.LastName
+                LastName = model.LastName,
+                Email = model.Email
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -53,6 +49,11 @@ namespace EK_tracker.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                 }
                 return RedirectToAction("Index", "Home");
+            } else
+            {
+                var errors = result.Errors;
+                var message = string.Join(", ", errors);
+                ModelState.AddModelError("", message);
             }
 
             return RedirectToAction("Index", "Login");
